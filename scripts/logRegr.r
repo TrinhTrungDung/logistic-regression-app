@@ -4,9 +4,11 @@ clean.py for how to do it
 
 @author: Hoang
 "'
+install.packages("ResourceSelection","DescTools","aod","caret")
 library(ResourceSelection)
 library(DescTools)
 library(aod)
+library(caret)
 #Load the data set
 creditData<-read.csv("~/Documents/credit_cleaned.csv",header=T,na.strings = c(""))
 creditData$BanruptcyInd<-as.factor(creditData$BanruptcyInd)
@@ -17,13 +19,13 @@ train<-creditData[301:2900,]
 test$TARGET<-NULL
 #Training the model using the train subset
 model<-glm(formula = TARGET ~ ., family = binomial(link = "logit"), 
-    data = train)
+           data = train)
 #Print out the summary
 #summary(model)
 #Printing out variable importance
 varImpTable <- as.data.frame(varImp(model))
-varImpTable <- data.frame(Overall = imp$Overall, names = rownames(varImpTable))
-varImpTable <- varImpTable[order(varImpTable$overall,decreasing = T),]
+varImpTable <- data.frame(Overall = varImpTable$Overall, names = rownames(varImpTable))
+varImpTable <- varImpTable[order(varImpTable$Overall,decreasing = T),]
 print(varImpTable)
 #Using the model to predict TARGET on the test subset
 fitted.results<-predict(model,newdata=test,type='response')
