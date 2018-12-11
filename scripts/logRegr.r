@@ -4,7 +4,7 @@ clean.py for how to do it
 
 @author: Hoang
 "'
-install.packages("ResourceSelection","DescTools","aod","caret")
+#install.packages("ResourceSelection","DescTools","aod","caret")
 library(ResourceSelection)
 library(DescTools)
 library(aod)
@@ -40,6 +40,7 @@ newModel<-glm(formula = TARGET ~ TLTimeFirst + TLCnt03 +
               data=train)
 print(summary(newModel))
 #Output Pseudo R^2
+print(PseudoR2(model,which="McFadden"))
 print(PseudoR2(newModel,which="McFadden"))
 #Output ANOVA 
 print(anova(model,newModel, test="Chisq"))
