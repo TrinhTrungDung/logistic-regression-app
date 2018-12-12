@@ -11,9 +11,10 @@ Data also overlaps a lot in terms of distribution
 -> Scatterplot might reveal terrible correlations
 OLS might be better here
 "'
-install.packages("MASS")
+#install.packages("MASS")
 library(MASS)
-
+library(tidyverse)
+library(caret)
 #Load the data set
 creditData<-read.csv("~/Documents/credit_cleaned.csv",header=T,na.strings = c(""))
 creditData$BanruptcyInd<-as.factor(creditData$BanruptcyInd)
@@ -23,6 +24,10 @@ test<-creditData[1:300,]
 train<-creditData[301:2900,]
 #Deleting the TARGET column on the test subset
 test$TARGET<-NULL
+#Normalize the data?
+preproc.param <- train %>% preProcess(method=c("center","scale"))
+train<-preproc.param %>% predict(train)
+test<-preproc.param %>% predict(test)
 #Output the LDA model
 model <- lda(TARGET ~ ., train)
 #Use the model to predict and output accuracy

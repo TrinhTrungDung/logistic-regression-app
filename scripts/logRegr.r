@@ -48,6 +48,6 @@ print(anova(model,newModel, test="Chisq"))
 hoslem.test(train$TARGET,fitted(newModel),g=10)
 #Using the new model to predict TARGET on the test subset
 fitted.results<-predict(newModel,newdata=test,type='response')
-fitted.results<-ifelse(fitted.results>0.5,1,0)
-misClasificError<-mean(fitted.results != creditData[1:300,]$TARGET)
+results<-ifelse(fitted.results>0.5,1,0)
+misClasificError<-mean(results != creditData[1:300,]$TARGET)
 print(paste('New Model Accuracy: ',1-misClasificError))
