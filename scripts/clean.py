@@ -22,7 +22,11 @@ import pandas as pd
 
 
 #Read CSV
+<<<<<<< HEAD
 creditRaw =pd.read_csv("../credit.csv")
+=======
+creditRaw =pd.read_csv("~/Documents/credit.csv")
+>>>>>>> 8c36506cb0397f7e0bb16fdb22eb4c62ea7c9741
 #Drop the ID collumn
 creditRaw=creditRaw.drop(columns=["ID"])
 #Imputate InqTimeLast, TLSatCnt, TLSatPct
@@ -31,4 +35,8 @@ creditRaw=creditRaw.fillna(value=fillDict)
 #Drop all other observation with a null value
 creditRaw=creditRaw.dropna();
 #Write to a csv file
+<<<<<<< HEAD
 creditRaw.to_csv("credit_cleaned.csv",index=False,sep=',')
+=======
+creditRaw.to_csv("credit_cleaned.csv",index=false,sep=',')
+>>>>>>> 8c36506cb0397f7e0bb16fdb22eb4c62ea7c9741

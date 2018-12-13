@@ -21,7 +21,11 @@ import pandas as pd
 
 
 #Read CSV
+<<<<<<< HEAD
 creditRaw =pd.read_csv("../credit.csv")
+=======
+creditRaw =pd.read_csv("~/Documents/credit.csv")
+>>>>>>> 8c36506cb0397f7e0bb16fdb22eb4c62ea7c9741
 #Drop the low corellation columns
 keepList=['ID','TLTimeFirst', 'TLCnt03', 'TLSatCnt', 'TLDel60Cnt',
           'TL75UtilCnt','TLBalHCPct', 'TLSatPct','TLDel3060Cnt24',
