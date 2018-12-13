@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="539.0" prefWidth="1096.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ui.controller.CreditController">
+   <top>
+      <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
+         <menus>
+            <Menu mnemonicParsing="false" text="File">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#onImportMenuClicked" text="Import..." />
+                  <MenuItem mnemonicParsing="false" onAction="#onExportMenuClicked" text="Export..." />
+                  <MenuItem mnemonicParsing="false" onAction="#onExitMenuClicked" text="Exit" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Edit">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#onCreditViewClicked" text="Credit" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <TableView fx:id="creditTable" editable="true" prefHeight="457.0" prefWidth="991.0" BorderPane.alignment="CENTER">
+         <columns>
+            <TableColumn fx:id="idColumn" prefWidth="55.0" text="ID">
+            	<cellValueFactory>
+               		<PropertyValueFactory property="ID" />
+               	</cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="tlTimeFirstColumn" prefWidth="98.0" text="TLTimeFirst">
+           		<cellValueFactory>
+               		<PropertyValueFactory property="tlTimeFirst" />
+               	</cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="tlCnt03Column" prefWidth="72.0" text="TLCnt03">
+            	<cellValueFactory>
+               		<PropertyValueFactory property="tlCnt03" />
+               	</cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="tlSatCntColumn" prefWidth="75.0" text="TLSatCnt">
+            	<cellValueFactory>
+               		<PropertyValueFactory property="tlSatCnt" />
+               	</cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="tlDel60CntColumn" prefWidth="101.0" text="TLDel60Cnt">
+            	<cellValueFactory>
+               		<PropertyValueFactory property="tlDel60Cnt" />
+               	</cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="tl75UtilCntColumn" prefWidth="99.0" text="TL75UtilCnt">
+            	<cellValueFactory>
+               		<PropertyValueFactory property="tl75UtilCnt" />
+               	</cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="tlBalHCPctColumn" prefWidth="96.0" text="TLBalHCPct">
+            	<cellValueFactory>
+               		<PropertyValueFactory property="tlBalHCPct" />
+               	</cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="tlSatPctColumn" minWidth="4.0" prefWidth="71.0" text="TLSatPct">
+            	<cellValueFactory>
+               		<PropertyValueFactory property="tlSatPct" />
+               	</cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="tlDel3060Cnt24Column" minWidth="7.0" prefWidth="137.0" text="TLDel3060Cnt24">
+            	<cellValueFactory>
+               		<PropertyValueFactory property="tlDel3060Cnt24" />
+               	</cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="tlOpen24PctColumn" minWidth="0.0" prefWidth="115.0" text="TLOpen24Pct">
+            	<cellValueFactory>
+               		<PropertyValueFactory property="tlOpen24Pct" />
+               	</cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="targetColumn" prefWidth="75.0" text="TARGET">
+            	<cellValueFactory>
+               		<PropertyValueFactory property="target" />
+               	</cellValueFactory>
+            </TableColumn>
+         </columns>
+      </TableView>
+   </center>
+   <right>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAddButtonClicked" text="Add" />
+            <Button fx:id="addButton1" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onSaveButtonClicked" text="Save" />
+            <Button fx:id="addButton11" layoutX="10.0" layoutY="88.0" mnemonicParsing="false" onAction="#onDeleteButtonClicked" text="Delete" />
+            <Button fx:id="refreshButton" mnemonicParsing="false" onAction="#onRefreshButtonClicked" text="Refresh" />
+            <Button fx:id="validateButton" mnemonicParsing="false" onAction="#onValidateButtonClicked" text="Validate" />
+         </children>
+      </VBox>
+   </right>
+   <bottom>
+      <AnchorPane prefHeight="45.0" prefWidth="1036.0" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>

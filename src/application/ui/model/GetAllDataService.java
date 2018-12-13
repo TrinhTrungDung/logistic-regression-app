@@ -7,8 +7,23 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import application.model.CreditResponse;
+import application.model.CreditResponseDeserializer;
+import application.ui.controller.CreditController;
+import application.ui.controller.ProgressController;
+import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class GetAllDataService extends Service<String> {
 
@@ -18,9 +33,9 @@ public class GetAllDataService extends Service<String> {
 			@Override
 			protected String call() throws Exception {
 				StringBuffer response = new StringBuffer();
-				// Connect to server
+				
 				try {
-					URL url = new URL("http://localhost:3000/credit/logistic");
+					URL url = new URL("http://localhost:3000/credit");
 					HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 					connection.setRequestMethod("GET");
 					connection.setRequestProperty("Content-Type", "application/json");
@@ -36,7 +51,7 @@ public class GetAllDataService extends Service<String> {
 					
 					Thread.sleep(1000);
 					
-					System.out.println(response.toString());
+					connection.disconnect();
 				} catch (MalformedURLException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
@@ -46,11 +61,6 @@ public class GetAllDataService extends Service<String> {
 					e.printStackTrace();
 				}
 				
-				// Get Json document
-				
-				// Parse it into appropriate format
-				
-				// Return to that format
 				return response.toString();
 			}
 		};

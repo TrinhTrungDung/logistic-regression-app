@@ -14,7 +14,7 @@ const CreditSchema = new Schema({
       message: '{VALUE} is not an integer value'
     }
   },
-  TLTimeLast: {
+  TLTimeFirst: {
     type: Number,
     validate: {
       validator: Number.isInteger,
@@ -29,11 +29,7 @@ const CreditSchema = new Schema({
     }
   },
   TLSatCnt: {
-    type: Number,
-    validate: {
-      validator: Number.isInteger,
-      message: '{VALUE} is not an integer value'
-    }
+    type: Number
   },
   TLDel60Cnt: {
     type: Number,
@@ -43,11 +39,7 @@ const CreditSchema = new Schema({
     }
   },
   TL75UtilCnt: {
-    type: Number,
-    validate: {
-      validator: Number.isInteger,
-      message: '{VALUE} is not an integer value'
-    }
+    type: Number
   },
   TLBalHCPct: {
     type: Number

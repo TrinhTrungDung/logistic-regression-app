@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.AutoCompleteTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="602.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="500.0" prefHeight="602.0" prefWidth="563.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ui.controller.AddCreditController">
+   <children>
+      <HBox prefHeight="58.0" prefWidth="390.0" spacing="10.0">
+         <children>
+            <Label text="Time Since First Trade Line:">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+            <AutoCompleteTextField fx:id="tlTimeFirstTextField" />
+            <Label fx:id="requiredTlTimeFirstIntLabel" text="Integer required" visible="false" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox layoutX="20.0" layoutY="20.0" prefHeight="58.0" prefWidth="390.0" spacing="10.0">
+         <children>
+            <Label text="Number Trade Lines Opened 3 Months:" />
+            <AutoCompleteTextField fx:id="tlCnt03TextField" />
+            <Label fx:id="requiredTlCnt03IntLabel" text="Integer required" visible="false" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="88.0" prefHeight="58.0" prefWidth="390.0" spacing="10.0">
+         <children>
+            <Label text="Number Trade Lines Currently Satisfactory:" />
+            <AutoCompleteTextField fx:id="tlSatCntTextField" />
+            <Label fx:id="requiredTlSatCntIntLabel" text="Integer required" visible="false" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="88.0" prefHeight="58.0" prefWidth="390.0" spacing="10.0">
+         <children>
+            <Label text="Number Trade Lines Currently 60 Days or Worse:" />
+            <AutoCompleteTextField fx:id="tlDel60CntTextField" />
+            <Label fx:id="requiredTlDel60CntIntLabel" text="Integer required" visible="false" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="204.0" prefHeight="58.0" prefWidth="390.0" spacing="10.0">
+         <children>
+            <Label text="Number Trade Lines 75% Utilized:" />
+            <AutoCompleteTextField fx:id="tl75UtilCntTextField" />
+            <Label fx:id="requiredTl75UtilCntIntLabel" text="Integer required" visible="false" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="204.0" spacing="10.0">
+         <children>
+            <Label text="Percentage Trade Line Balance to High Credit:" />
+            <AutoCompleteTextField fx:id="tlBalHCPctTextField" />
+            <Label fx:id="requiredTlBalHCPctNumLabel" text="Number between 0 and 1" visible="false" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="262.0" prefHeight="58.0" prefWidth="390.0" spacing="10.0">
+         <children>
+            <Label text="Percentage Satisfactory to Total Trade Lines:" />
+            <AutoCompleteTextField fx:id="tlSatPctTextField" />
+            <Label fx:id="requiredTlSatPctNumLabel" text="Number between 0 and 1" visible="false" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="378.0" prefHeight="58.0" prefWidth="390.0" spacing="10.0">
+         <children>
+            <Label text="Number Trade Lines 30 or 60 Days 24 Months:" />
+            <AutoCompleteTextField fx:id="tlDel3060CntTextField" />
+            <Label fx:id="requiredTlDel3060CntIntLabel" text="Integer required" visible="false" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="436.0" prefHeight="60.0" prefWidth="390.0" spacing="10.0">
+         <children>
+            <Label text="Percentage Trade Lines Open 24 Months:" />
+            <AutoCompleteTextField fx:id="tlOpen24PctTextField" />
+            <Label fx:id="requiredTlOpen24PctNumLabel" text="Number between 0 and 1" visible="false" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <ButtonBar prefHeight="81.0" prefWidth="428.0">
+        <buttons>
+          <Button fx:id="submitButton" mnemonicParsing="false" onAction="#onSubmitButtonClicked" text="Submit" />
+        </buttons>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+      </ButtonBar>
+   </children>
+</VBox>

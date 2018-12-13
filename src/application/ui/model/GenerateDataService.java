@@ -31,7 +31,7 @@ public class GenerateDataService extends Service<String> {
 				byte[] encodedData =
 						transformToJson().getBytes(StandardCharsets.UTF_8);
 				
-				URL url = new URL("http://localhost:3000/credit/logistic");
+				URL url = new URL("http://localhost:3000/credit/random");
 				HttpURLConnection connection = 
 						(HttpURLConnection) url.openConnection();
 				connection.setDoOutput(true);
@@ -56,6 +56,8 @@ public class GenerateDataService extends Service<String> {
 					
 					Thread.sleep(1000);
 				}
+				
+				connection.disconnect();
 				
 				return response.toString();
 			}
