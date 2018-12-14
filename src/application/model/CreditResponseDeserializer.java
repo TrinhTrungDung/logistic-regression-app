@@ -54,8 +54,7 @@ public class CreditResponseDeserializer implements JsonDeserializer<CreditRespon
 		
 		Credit credit = new Credit(ID, tlTimeFirst, tlCnt03, tlSatCnt,
 				tlDel60Cnt, tl75UtilCnt, tlBalHCPct, tlSatPct, 
-				tlDel3060Cnt24, tlOpen24Pct);
-		credit.setTarget(target);
+				tlDel3060Cnt24, tlOpen24Pct, target);
 		
 		return credit;
 	}

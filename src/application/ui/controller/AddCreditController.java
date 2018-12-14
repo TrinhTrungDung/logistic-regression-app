@@ -95,13 +95,13 @@ public class AddCreditController implements Initializable {
 			handleRequiredLabel(requiredTlCnt03IntLabel, newValue, Integer.class);
 		});
 		tlSatCntTextField.textProperty().addListener((obs, oldValue, newValue) -> {
-			handleRequiredLabel(requiredTlSatCntIntLabel, newValue, Integer.class);
+			handleRequiredLabel(requiredTlSatCntIntLabel, newValue, Double.class);
 		});
 		tlDel60CntTextField.textProperty().addListener((obs, oldValue, newValue) -> {
 			handleRequiredLabel(requiredTlDel60CntIntLabel, newValue, Integer.class);
 		});
 		tl75UtilCntTextField.textProperty().addListener((obs, oldValue, newValue) -> {
-			handleRequiredLabel(requiredTl75UtilCntIntLabel, newValue, Integer.class);
+			handleRequiredLabel(requiredTl75UtilCntIntLabel, newValue, Double.class);
 		});
 		tlBalHCPctTextField.textProperty().addListener((obs, oldValue, newValue) -> {
 			handleRequiredLabel(requiredTlBalHCPctNumLabel, newValue, Double.class);
@@ -117,8 +117,12 @@ public class AddCreditController implements Initializable {
 		});
 	}
 	
-	private void handleRequiredLabel(Label requiredLabel, String value, Class clazz) {
+	private void handleRequiredLabel(Label requiredLabel, 
+			String value, Class clazz) {
 		try {
+			if (!checkPositiveInteger(value)) {
+				throw new IllegalArgumentException();
+			}
 			if (clazz.getSimpleName().equals("Integer")) {
 				Integer.parseInt(value);
 			} else {
@@ -128,10 +132,28 @@ public class AddCreditController implements Initializable {
 			requiredLabel.setVisible(false);
 			submitButton.setDisable(false);
 		} catch (NumberFormatException nfe) {
+			if (clazz.getSimpleName().equals("Integer")) {
+				requiredLabel.setText("Integer required");
+			} else {
+				requiredLabel.setText("Required decimal number");
+			}
+			requiredLabel.getStyleClass().add("error");
+			requiredLabel.setVisible(true);
+			submitButton.setDisable(true);
+		} catch (IllegalArgumentException iae) {
+			requiredLabel.setText("Required positive number");
 			requiredLabel.getStyleClass().add("error");
 			requiredLabel.setVisible(true);
 			submitButton.setDisable(true);
 		}
+	}
+	
+	private boolean checkPositiveInteger(String value) {
+		if (Double.valueOf(value) >= 0) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 	private void runCreateCreditService(Service<String> service) 

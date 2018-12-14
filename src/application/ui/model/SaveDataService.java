@@ -98,7 +98,9 @@ public class SaveDataService extends Service<String> {
 				+ "\"TLDel3060Cnt24\":" + String.valueOf(
 						credit.getTlDel3060Cnt24()) + ","
 				+ "\"TLOpen24Pct\":" + String.valueOf(
-						credit.getTlOpen24Pct()) + 
+						credit.getTlOpen24Pct()) + ","
+				+ "\"TARGET\":" + String.valueOf(
+						credit.getTarget()) +
 				"}";
 	}
 

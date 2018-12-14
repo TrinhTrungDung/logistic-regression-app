@@ -45,44 +45,63 @@ router.route('/:ID')
     .put((req, res, next) => {
       Credit.findById(req.params.ID)
         .then((credit) => {
-          console.log(credit);
-          if (credit != null) {
-            if (req.body.TLTimeFirst) {
-              console.log(req.body.TLTimeFirst);
-            }
-            if(req.body.TLCnt03) {
-              console.log(req.body.TLCnt03);
-            }
-            if(req.body.TLSatCnt) {
-              console.log(req.body.TLSatCnt);
-            }
-            if(req.body.TLDel60Cnt) {
-              console.log(req.body.TLDel60Cnt);
-            }
-            if(req.body.TL75UtilCnt) {
-              console.log(req.body.TL75UtilCnt);
-            }
-            if(req.body.TLBalHCPct) {
-              console.log(req.body.TLBalHCPct);
-            }
-            if(req.body.TLSatPct) {
-              console.log(req.body.TLSatPct);
-            }
-            if(req.body.TLDel3060Cnt24) {
-              console.log(req.body.TLDel3060Cnt24);
-            }
-            if(req.body.TLOpen24Pct) {
-              console.log(req.body.TLOpen24Pct);
-            }
-          }
-          // credit.save()
-          //     .then((credit) => {
-          //
-          //     });
-          res.json({
-            test: "test"
+              if (credit != null) {
+                if (req.body.TLTimeFirst >= 0) {
+                  credit.TLTimeFirst = req.body.TLTimeFirst;
+                }
+                if (req.body.TLCnt03 >= 0) {
+                  credit.TLCnt03 = req.body.TLCnt03;
+                }
+                if(req.body.TLSatCnt >= 0) {
+                  credit.TLSatCnt = req.body.TLSatCnt;
+                }
+                if(req.body.TLDel60Cnt >= 0) {
+                  credit.TLDel60Cnt = req.body.TLDel60Cnt;
+                }
+                if(req.body.TL75UtilCnt >= 0) {
+                  credit.TL75UtilCnt = req.body.TL75UtilCnt;
+                }
+                if(req.body.TLBalHCPct >= 0 && req.body.TLBalHCPct <= 1) {
+                  credit.TLBalHCPct = req.body.TLBalHCPct;
+                }
+                if(req.body.TLSatPct >= 0 && req.body.TLSatPct <= 1) {
+                  credit.TLSatPct = req.body.TLSatPct;
+                }
+                if(req.body.TLDel3060Cnt24 >= 0) {
+                  credit.TLDel3060Cnt24 = req.body.TLDel3060Cnt24;
+                }
+                if(req.body.TLOpen24Pct >= 0 && req.body.TLOpen24Pct <= 1) {
+                  credit.TLOpen24Pct = req.body.TLOpen24Pct;
+                }
+                if (req.body.TARGET === 0 || req.body.TARGET === 1) {
+                  credit.TARGET = req.body.TARGET;
+                }
+              }
+            credit.save()
+                .then((credit) => {
+                  res.json({
+                    data: credit
+                  });
+                });
+        })
+        .catch((err) => console.log(err));
+    })
+    .delete((req, res, next) => {
+      Credit.findById(req.params.ID)
+          .then((credit) => {
+              if (credit != null) {
+                credit.remove();
+                res.json({
+                  success: true,
+                  message: `Credit with ID of ${req.params.ID} has been deleted.`
+                });
+              } else {
+                res.json({
+                  success: false,
+                  message: `Error occurs while deleting credit with ID of ${req.params.ID}`
+                });
+              }
           });
-        });
     });
 
 router.route('/random')

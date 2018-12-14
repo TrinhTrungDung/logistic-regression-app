@@ -5,16 +5,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import com.fasterxml.jackson.databind.MappingIterator;
-import com.fasterxml.jackson.databind.ObjectReader;
-import com.fasterxml.jackson.dataformat.csv.CsvMapper;
-import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -23,6 +18,8 @@ import application.model.CreditResponse;
 import application.model.CreditResponseDeserializer;
 import application.model.IntegerConverter;
 import application.model.DoubleConverter;
+import application.ui.model.DeleteAllDataService;
+import application.ui.model.DeleteCreditService;
 import application.ui.model.GetAllDataService;
 import application.ui.model.SaveDataService;
 import javafx.application.Platform;
@@ -41,14 +38,20 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
 
 public class CreditController implements Initializable {
 	
+	private Stage stage;
 	private Service<String> service;
+	private File file;
+	
+	public void setStage(Stage stage) {
+		this.stage = stage;
+	}
 	
 	@FXML
 	private MenuBar menuBar;
@@ -82,25 +85,31 @@ public class CreditController implements Initializable {
 	@FXML
 	private Button addButton;
 	@FXML
+	private Button saveButton;
+	@FXML
+	private Button deleteButton;
+	@FXML
+	private Button deleteAllButton;
+	@FXML
 	private Button refreshButton;
 	@FXML
 	private Button validateButton;
 	
 	@FXML
 	void onImportMenuClicked(ActionEvent event) throws IOException {
-//		FileChooser fileChooser = new FileChooser();
-//		
-//		configureFileChooser(fileChooser);
-//		file = fileChooser.showOpenDialog(this.stage);
-//		
-//		if (file != null) {
-//			System.out.println(file.getName());
-//		}
+		FileChooser fileChooser = new FileChooser();
+		
+		configureFileChooser(fileChooser);
+		file = fileChooser.showOpenDialog(this.stage);
+		
+		if (file != null) {
+			System.out.println(file.getName());
+		}
 	}
 	
 	@FXML
 	void onExportMenuClicked(ActionEvent event) {
-		
+		System.out.println("Future implementation");
 	}
 	
 	@FXML
@@ -147,8 +156,26 @@ public class CreditController implements Initializable {
 	}
 	
 	@FXML
-	void onDeleteButtonClicked(ActionEvent event) {
+	void onDeleteButtonClicked(ActionEvent event)
+			throws IOException {
+		Credit credit = creditTable.getSelectionModel()
+				.getSelectedItem();
+		service = new DeleteCreditService(credit.getID());
+		service.start();
 		
+		service = new GetAllDataService();
+		runService(service, creditTable);
+	}
+	
+	@FXML
+	void onDeleteAllButtonClicked(ActionEvent event)
+			throws IOException {
+		List<Integer> idList = new ArrayList<>();
+		creditTable.getItems().forEach(credit -> {
+			idList.add(((Credit) credit).getID());
+		});
+		service = new DeleteAllDataService(idList);
+		service.start();
 	}
 	
 	@FXML
@@ -159,20 +186,6 @@ public class CreditController implements Initializable {
 	@FXML
 	void onValidateButtonClicked(ActionEvent event) 
 			throws IOException {
-		File file = new File("scripts/credit_DB.csv");
-		
-		CsvMapper mapper = new CsvMapper();
-		CsvSchema schema = mapper.schemaFor(Credit.class).withUseHeader(true);
-		ObjectReader objectReader = mapper.readerFor(Credit.class).with(schema);
-		
-		try (Reader reader = new FileReader(file)) {
-			MappingIterator iterator = objectReader.readValues(reader);
-			
-			while (iterator.hasNext()) {
-				System.out.println(iterator.next());
-			}
-		}
-		
 		file = new File("scripts/model.csv");
 		
 		List<Double> coefficients = readLogisticModel(file);
@@ -194,6 +207,19 @@ public class CreditController implements Initializable {
 			credit.setTarget(target);
 		});
 	}
+	
+	@FXML
+	void onReturnMainButtonClicked(ActionEvent event) 
+			throws IOException {
+		FXMLLoader loader = new FXMLLoader(
+				getClass().getResource("../view/MainView.fxml"));
+		Parent mainViewParent = loader.load();
+		
+		Scene mainScene = new Scene(mainViewParent);
+		Stage mainStage = (Stage) menuBar.getScene().getWindow();
+		mainStage.setScene(mainScene);
+		mainStage.show();
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -205,7 +231,8 @@ public class CreditController implements Initializable {
 		List<Double> coefficients = new ArrayList<>();
 		
 		if (file.exists()) {
-			BufferedReader reader = new BufferedReader(new FileReader(file));
+			BufferedReader reader = 
+					new BufferedReader(new FileReader(file));
 			
 			reader.lines().forEach(line -> {
 				String[] splittedLine = line.split(",");
@@ -442,6 +469,14 @@ public class CreditController implements Initializable {
 		} else {
 			credit.setTlOpen24Pct(newPct);
 		}
+	}
+	
+	private static void configureFileChooser(final FileChooser fileChooser) {
+		fileChooser.setTitle("Choose csv file");
+		fileChooser.setInitialDirectory(
+				new File(System.getProperty("user.home")));
+		fileChooser.getExtensionFilters().addAll(
+				new FileChooser.ExtensionFilter("CSV", "*.csv"));
 	}
 
 }

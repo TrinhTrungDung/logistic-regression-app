@@ -7,23 +7,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import application.model.CreditResponse;
-import application.model.CreditResponseDeserializer;
-import application.ui.controller.CreditController;
-import application.ui.controller.ProgressController;
-import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class GetAllDataService extends Service<String> {
 
@@ -57,7 +42,6 @@ public class GetAllDataService extends Service<String> {
 				} catch (IOException e) {
 					e.printStackTrace();
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				

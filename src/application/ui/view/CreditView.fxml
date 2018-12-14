@@ -102,8 +102,10 @@
             <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAddButtonClicked" text="Add" />
             <Button fx:id="addButton1" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onSaveButtonClicked" text="Save" />
             <Button fx:id="addButton11" layoutX="10.0" layoutY="88.0" mnemonicParsing="false" onAction="#onDeleteButtonClicked" text="Delete" />
+            <Button fx:id="deleteAllButton" layoutX="10.0" layoutY="62.0" mnemonicParsing="false" onAction="#onDeleteAllButtonClicked" text="Delete All" />
             <Button fx:id="refreshButton" mnemonicParsing="false" onAction="#onRefreshButtonClicked" text="Refresh" />
             <Button fx:id="validateButton" mnemonicParsing="false" onAction="#onValidateButtonClicked" text="Validate" />
+            <Button fx:id="backButton" layoutX="10.0" layoutY="140.0" mnemonicParsing="false" onAction="#onReturnMainButtonClicked" text="Back" />
          </children>
       </VBox>
    </right>
